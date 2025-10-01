@@ -1,0 +1,114 @@
+@import "mocha.css";
+
+* {
+    font-family: "JetBrainsMono Nerd Font", FontAwesome, sans-serif;
+    font-weight: bold;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent; /* Slightly transparent base */
+    /*border-bottom: 1px solid @overlay1;*/
+    color: @text;
+}
+
+tooltip {
+    background: @crust;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+/* Reset all borders and add consistent styling */
+#workspaces,
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#mpris,
+#bluetooth,
+/*#tray,*/
+#idle_inhibitor,
+#custom-fanspeed,
+#custom-fps,
+#keyboard-state,
+#custom-power,
+#custom-power-menu,
+#window {
+    background: @surface0;
+    padding: 2px 8px;
+    margin: 4px 2px;
+    border: 1px solid @surface1;
+    border-radius: 10px;
+    min-width: 0;
+}
+
+#window.empty {
+    background: transparent;
+    border: none;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: @overlay0;
+    border-radius: 0; /* No radius for individual buttons */
+    border: none; /* No border for individual buttons */
+}
+
+#workspaces button.focused {
+    color: @mauve;
+}
+
+#workspaces button.urgent {
+    color: @red;
+}
+
+#battery.charging, #battery.plugged {
+    color: @green;
+}
+
+@keyframes blink {
+    to {
+        background-color: @red;
+        color: @crust;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: @red;
+    color: @crust;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#temperature.critical {
+    background-color: @red;
+}
+
+#network.disconnected {
+    background-color: @red;
+    color: @crust;
+}
+
+#pulseaudio.muted,
+#mpris.playing {
+    background-color: @surface2;
+}
+
+#mpris.paused {
+    background-color: @surface1;
+}
+
+#idle_inhibitor.activated {
+    background-color: @surface2;
+    color: @text;
+}

@@ -1,0 +1,215 @@
+{
+  "position": "top",
+  "layer": "top",
+  "height": 40,
+  "spacing": 2,
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "custom/fps",
+    "pulseaudio",
+    "mpris",
+    "network",
+    // "cpu",
+    // "tray",
+    // "memory",
+    "disk",
+    "temperature",
+    "backlight",
+    "bluetooth",
+    "battery",
+    "keyboard-state",
+    //"custom/fanspeed",
+    // "idle_inhibitor",
+    "custom/power",
+    "custom/power-menu"
+  ],
+
+  // Clock
+  "clock": {
+    "format": "<span foreground='#f5c2e7'> </span> {:%a %d %I:%M:%p}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  // Tray
+  "tray": {
+    "icon-size": 16,
+    "spacing": 5
+  },
+
+  // Workspaces
+  "hyprland/workspaces": {
+    "on-click": "activate",
+    "all-outputs": true,
+    "format": "{id}: {icon}",
+    "format-icons": {
+      "1": " ",
+      "2": " ",
+      "3": " ",
+      "4": " ",
+      "5": " ",
+      "urgent": " ",
+      "focused": " ",
+      "default": " "
+    }
+  },
+
+  // Window
+  "hyprland/window": {
+    "format": "{}",
+    "format-empty": ""
+  },
+
+  "custom/fps": {
+    "format": "{}",
+    "exec": "~/.config/waybar/scripts/hyprland-fps.sh",
+    "on-click": "~/.config/waybar/scripts/hyprland-fps.sh",
+    "return-type": "json"
+},
+
+  // CPU
+  "cpu": {
+    "format": "<span foreground='#f9e2af'> </span> {usage}%",
+    "tooltip": true
+  },
+
+  // Memory
+  "memory": {
+    "format": "<span foreground='#cba6f7'></span> {}%",
+    "tooltip": true
+  },
+
+  // Disk
+  "disk": {
+    "format": "<span foreground='#a6e3a1'></span> {free}",
+    "path": "/"
+  },
+
+  // Temperature
+  "temperature": {
+    "thermal-zone":1,
+    "interval":2,	
+    "critical-threshold": 80,
+    "format": "<span foreground='#f38ba8'></span> {temperatureC}°C"
+  },
+
+  // Backlight
+  "backlight": {
+    "format": "<span foreground='#cba6f7'> </span> {percent}%",
+    "tooltip-format":"<span foreground='#89b4fa'>{percent}%</span>"
+  },
+
+  // Bluetooth
+  "bluetooth": {
+    "format": "<span foreground='#89b4fa'></span>",
+    "format-disabled": "", // an empty format will hide the module
+    "format-connected": "<span foreground='#89b4fa'></span> {device_alias} {device_battery_percentage} ",
+    "tooltip-format": "{device_alias} {device_battery_percentage}",
+    "on-click": "blueman-manager"
+  },
+
+  // Network
+  "network": {
+    "format-wifi": "<span foreground='#f5e0dc'> </span> {signalStrength}% {bandwidthDownBits}",
+    "interval":1,
+    "format-ethernet": "<span foreground='#f5e0dc'>󰤭</span> {ifname}",
+    "format-disconnected": "<span foreground='#f5e0dc'></span> Disconnected",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+    "on-click": "nm-connection-editor"
+  },
+
+  // Audio
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": " Muted",
+    "format-icons": {
+      "default": ["", " ", " "],
+      "bluez_card": "",
+      "bluez_output.64_8F_DB_F3_57_30.1": ""
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "mpris": {
+    "format": "{player_icon} {title}",
+    "format-stopped": "",
+    "format-paused": "{status_icon} <i>{title}</i>",
+    "expand":true,
+    "title-len":10,
+    "status-icons":{
+        "paused":  "⏸" 
+    },
+    "player-icons": {
+        "default": "▶",
+        "mpv": "🎵",
+        "vlc": "🎬"
+    }
+  },
+
+  // Battery
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "<span foreground='#a6e3a1'>{icon}</span> {capacity}%",
+    "format-warning": "<span foreground='#f9e2af'>{icon}</span> {capacity}%",
+    "format-critical": "<span foreground='#f38ba8'>{icon}</span> {capacity}%",
+    "format-charging": "<span foreground='#a6e3a1'></span> {capacity}%",
+    "format-plugged": "<span foreground='#a6e3a1'></span> {capacity}%",
+    "format-full": "<span foreground='#a6e3a1'></span> Full",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  // Idle Inhibitor
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": " "
+    }
+  },
+  "keyboard-state":{
+	"device-path":"/dev/input/event20",
+	"numlock": false,
+	"capslock": false,
+	"scrolllock": true,
+	"format":"{name} {icon}",
+	"format-icons": {
+		"locked": "  ",
+		"unlocked": "  "
+	}
+
+},
+
+  // Custom Power
+  "custom/power": {
+    "exec": "powerprofilesctl get",
+    "interval": 1,
+    "format": "<span foreground='#a6e3a1'>{}</span>",
+    "tooltip": false,
+    "on-click": "~/.config/hypr/cycle-power.sh"
+  },
+
+  "custom/power-menu": {
+    "format": " ",
+    "on-click": "wlogout",
+    "tooltip": false
+  },
+
+
+ "custom/fanspeed": {
+  "exec": "~/.config/waybar/scripts/fanspeed.sh",
+  "format":"{}",
+  "tooltip":false,
+  "interval": 20,
+  "return-type": "json"
+}
+
+}
